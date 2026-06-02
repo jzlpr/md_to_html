@@ -1,3 +1,4 @@
+use chrono::Local;
 use pulldown_cmark::{Options, Parser, html};
 use std::env;
 use std::fs::{self, File};
@@ -22,11 +23,14 @@ fn main() -> std::io::Result<()> {
         path.with_extension("html").to_string_lossy().into_owned()
     };
 
-    // 2. Read the Markdown file
+    // 2. Capture and format the current date and time of the conversion
+    let timestamp = Local::now().format("%Y-%m-%d %H:%M:%S").to_string();
+
+    // 3. Read the Markdown file
     println!("📖 Reading Markdown from: {}", input_path);
     let markdown_input = fs::read_to_string(input_path)?;
 
-    // 3. Enable GitHub Flavored Markdown options
+    // 4. Enable GitHub Flavored Markdown options
     let mut options = Options::empty();
     options.insert(Options::ENABLE_TABLES);
     options.insert(Options::ENABLE_FOOTNOTES);
@@ -35,11 +39,11 @@ fn main() -> std::io::Result<()> {
 
     let parser = Parser::new_ext(&markdown_input, options);
 
-    // 4. Parse Markdown into HTML fragments
+    // 5. Parse Markdown into HTML fragments
     let mut html_output = String::new();
     html::push_html(&mut html_output, parser);
 
-    // 5. Modern GitHub CSS & Prism Theme Adjustments
+    // 6. Modern GitHub CSS & Prism Theme Adjustments
     let css_styles = r#"
         :root {
             --bg-color: #ffffff;
@@ -117,7 +121,7 @@ fn main() -> std::io::Result<()> {
         hr { height: 0.25em; background-color: var(--border-color); border: 0; margin: 24px 0; }
     "#;
 
-    // 6. Wrap everything with dynamic PrismJS CDN assets
+    // 7. Wrap everything with dynamic PrismJS CDN assets
     let full_html = format!(
         r#"<!DOCTYPE html>
 <html lang="en">
@@ -131,6 +135,7 @@ fn main() -> std::io::Result<()> {
 </head>
 <body>
     <article class="markdown-body">
+        <div class="meta-timestamp">📄 Generated on: {}</div>
         {}
     </article>
 
@@ -138,10 +143,10 @@ fn main() -> std::io::Result<()> {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>"#,
-        css_styles, html_output
+        css_styles, timestamp, html_output
     );
 
-    // 7. Save to the target HTML file
+    // 8. Save to the target HTML file
     let mut file = File::create(&output_path)?;
     file.write_all(full_html.as_bytes())?;
 
