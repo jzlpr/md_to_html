@@ -22,6 +22,7 @@ Clone or create your project directory, then add the core dependencies to your `
 ```toml
 [dependencies]
 pulldown-cmark = "0.12"  # GFM-compliant markdown parsing engine
+```
 
 ### 3. Compilation & Usage
 Compile and execute the program through Cargo. The tool is flexible and accepts either a single input file or an explicit output destination path.
@@ -31,7 +32,7 @@ If you provide only the input file, the program will generate an HTML file with 
 
 ```bash
 cargo run -- README.md
-
+```
 - Reads from: README.md
 - Outputs to: README.html (in the current directory)
 
@@ -40,14 +41,14 @@ To give your generated web page a completely different name, provide it as the s
 
 ```bash
 cargo run -- README.md index.html
-
+```
 - Reads from: README.md
 - Outputs to: index.html
 
 #### Example 3: Routing to a Different Output Path
 You can direct the program to output the file into a completely separate directory (such as a build or distribution folder).
 
-> Note: The target output directory must already exist on your system before running.
+`Note: The target output directory must already exist on your system before running.`
 
 ```bash
 # Save to a dedicated build folder
@@ -56,6 +57,5 @@ cargo run -- instructions.md dist/index.html
 # Save to an entirely different path location
 cargo run -- docs/api_v1.md /var/www/html/api-docs.html
 ```
-
 - Reads from: docs/api_v1.md
 - Outputs to: /var/www/html/api-docs.html
