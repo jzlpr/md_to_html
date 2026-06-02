@@ -59,3 +59,19 @@ cargo run -- docs/api_v1.md /var/www/html/api-docs.html
 ```
 - Reads from: docs/api_v1.md
 - Outputs to: /var/www/html/api-docs.html
+
+#### Example 4: Building a Standalone Binary for Production
+When you are ready to use this tool globally without relying on cargo run, compile a highly optimized, standalone production binary:
+
+```bash
+cargo build --release
+```
+This generates a compiled executable file with zero dependencies. You can find it at:
+
+`Linux/macOS: ./target/release/md_to_html`  
+`Windows: .\target\release\md_to_html.exe`
+
+Usage:
+```bash
+md_to_html custom_document.md output.html
+```
