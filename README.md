@@ -17,12 +17,7 @@ A lightweight, blazing-fast CLI tool built in Rust that converts GitHub Flavored
 Ensure you have the Rust toolchain installed. If not, get it via [rustup.rs](https://rustup.rs/).
 
 ### 2. Setup
-Clone or create your project directory, then add the core dependencies to your `Cargo.toml`:
-
-```toml
-[dependencies]
-pulldown-cmark = "0.12"  # GFM-compliant markdown parsing engine
-```
+Clone or create your project directory.
 
 ### 3. Compilation & Usage
 Compile and execute the program through Cargo. The tool is flexible and accepts either a single input file or an explicit output destination path.
