@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom title:)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" media="(prefers-color-scheme: dark)" />
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #24292f;
+            --link-color: #0969da;
+            --border-color: #d0d7de;
+            --code-bg: #f6f8fa;
+            --quote-color: #57606a;
+            --meta-color: #57606a;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0d1117;
+                --text-color: #c9d1d9;
+                --link-color: #58a6ff;
+                --border-color: #30363d;
+                --code-bg: #161b22;
+                --quote-color: #8b949e;
+                --meta-color: #8b949e;
+            }
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .meta-timestamp {
+            font-size: 0.85rem;
+            color: var(--meta-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        h1, h2, h3 {
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        a { color: var(--link-color); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        :not(pre) > code {
+            padding: 0.2em 0.4em;
+            background-color: var(--code-bg);
+            border-radius: 6px;
+            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace;
+            font-size: 85%;
+        }
+        pre {
+            padding: 16px;
+            background-color: var(--code-bg) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: auto;
+            margin: 1em 0;
+        }
+        pre code {
+            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace !important;
+            font-size: 85% !important;
+            text-shadow: none !important;
+            background: none !important;
+            padding: 0 !important;
+        }
+        blockquote {
+            padding: 0 1em;
+            color: var(--quote-color);
+            border-left: 0.25em solid var(--border-color);
+            margin: 0;
+        }
+        ul, ol { padding-left: 2em; }
+        li + li { margin-top: 0.25em; }
+        input[type="checkbox"] { margin-right: 0.5em; vertical-align: middle; }
+        hr { height: 0.25em; background-color: var(--border-color); border: 0; margin: 24px 0; }
+    </style>
+</head>
+<body>
+    <article class="markdown-body">
+        <div class="meta-timestamp">📄 Generated on: 2026-06-03</div>
+        <h1>🚀 Markdown to HTML Converter in Rust</h1>
+<p>A lightweight, blazing-fast CLI tool built in Rust that converts GitHub Flavored Markdown (GFM) into beautiful, responsive HTML files. It features automated light/dark mode styling matching modern aesthetics and fully dynamic code syntax highlighting.</p>
+<hr />
+<h2>🛠️ Features</h2>
+<ul>
+<li><strong>Full GFM Support:</strong> Handles tables, task lists, strikethroughs, and footnotes via <code>pulldown-cmark</code>.</li>
+<li><strong>Adaptive Styling:</strong> Responsive layout inspired by GitHub's documentation style with automatic light/dark theme swapping via OS preferences.</li>
+<li><strong>On-the-Fly Syntax Highlighting:</strong> Integrated with Prism.js to dynamically fetch and style code snippets for almost any standard coding language without binary bloat.</li>
+</ul>
+<hr />
+<h2>🚀 Quick Start</h2>
+<h3>1. Prerequisites</h3>
+<p>Ensure you have the Rust toolchain installed. If not, get it via <a href="https://rustup.rs/">rustup.rs</a>.</p>
+<h3>2. Setup</h3>
+<p>Clone or create your project directory.</p>
+<h3>3. Compilation &amp; Usage</h3>
+<p>Compile and execute the program through Cargo. The tool is flexible and accepts either a single input file or an explicit output destination path.</p>
+<h4>Example 1: Default Behavior (Same Directory &amp; Name)</h4>
+<p>If you provide only the input file, the program will generate an HTML file with the exact same name and in the exact same folder, merely changing the extension to <code>.html</code>.</p>
+<pre><code class="language-bash">cargo run -- README.md
+</code></pre>
+<ul>
+<li>Reads from: README.md</li>
+<li>Outputs to: README.html (in the current directory)</li>
+</ul>
+<h4>Example 2: Explicit Custom File Name</h4>
+<p>To give your generated web page a completely different name, provide it as the second argument:</p>
+<pre><code class="language-bash">cargo run -- README.md index.html
+</code></pre>
+<ul>
+<li>Reads from: README.md</li>
+<li>Outputs to: index.html</li>
+</ul>
+<h4>Example 3: Routing to a Different Output Path</h4>
+<p>You can direct the program to output the file into a completely separate directory (such as a build or distribution folder).</p>
+<p><code>Note: The target output directory must already exist on your system before running.</code></p>
+<pre><code class="language-bash"># Save to a dedicated build folder
+cargo run -- instructions.md dist/index.html
+
+# Save to an entirely different path location
+cargo run -- docs/api_v1.md /var/www/html/api-docs.html
+</code></pre>
+<ul>
+<li>Reads from: docs/api_v1.md</li>
+<li>Outputs to: /var/www/html/api-docs.html</li>
+</ul>
+<h4>Example 4: Building a Standalone Binary for Production</h4>
+<p>When you are ready to use this tool globally without relying on cargo run, compile a highly optimized, standalone production binary:</p>
+<pre><code class="language-bash">cargo build --release
+</code></pre>
+<p>This generates a compiled executable file with zero dependencies. You can find it at:</p>
+<p><code>Linux/macOS: ./target/release/md_to_html</code><br />
+<code>Windows: .\target\release\md_to_html.exe</code></p>
+<p>Usage:</p>
+<pre><code class="language-bash">md_to_html custom_document.md output.html
+</code></pre>
+
+    </article>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>
